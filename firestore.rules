@@ -1,0 +1,130 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Default deny catch-all
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isBootstrappedAdmin() {
+      return isSignedIn() && request.auth.token.email == "mim230189@gmail.com";
+    }
+
+    function getUserData() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid)).data;
+    }
+
+    function isAdmin() {
+      return isBootstrappedAdmin() || (isSignedIn() && exists(/databases/$(database)/documents/users/$(request.auth.uid)) && getUserData().role == 'admin');
+    }
+
+    function isEmployee() {
+      return isAdmin() || (isSignedIn() && exists(/databases/$(database)/documents/users/$(request.auth.uid)) && getUserData().role == 'employee');
+    }
+
+    function isCustomerOwner(customerId) {
+      return isSignedIn() && exists(/databases/$(database)/documents/users/$(request.auth.uid)) && getUserData().customerId == customerId;
+    }
+
+    // Users collection
+    match /users/{userId} {
+      allow read: if isSignedIn() && (request.auth.uid == userId || isAdmin() || isEmployee());
+      // Only admin or bootstrap can set roles; regular users cannot assign themselves admin/employee roles or active status
+      allow create: if isSignedIn() && (
+        isAdmin() || 
+        (request.auth.uid == userId && (!('role' in request.resource.data) || request.resource.data.role == 'customer') && (!('active' in request.resource.data) || request.resource.data.active == true))
+      );
+      // Prevent users from changing their own role, active status, customerId, or employeeId
+      allow update: if isAdmin() || (
+        isSignedIn() && request.auth.uid == userId && 
+        !request.resource.data.diff(resource.data).affectedKeys().hasAny(['role', 'active', 'customerId', 'employeeId'])
+      );
+      allow delete: if isAdmin();
+    }
+
+    // Customers collection
+    match /customers/{customerId} {
+      allow read: if isEmployee() || isCustomerOwner(customerId);
+      allow create, update: if isEmployee();
+      allow delete: if isAdmin();
+    }
+
+    // Packages collection
+    match /packages/{packageId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Invoices collection
+    match /invoices/{invoiceId} {
+      allow read: if isEmployee() || (isSignedIn() && resource.data.customerId != null && isCustomerOwner(resource.data.customerId));
+      allow create, update: if isEmployee();
+      allow delete: if isAdmin();
+    }
+
+    // Payments collection (Financial ledger)
+    match /payments/{paymentId} {
+      allow read: if isEmployee() || (isSignedIn() && resource.data.customerId != null && isCustomerOwner(resource.data.customerId));
+      allow create: if isEmployee();
+      allow update: if isAdmin(); // Reversals allowed only by admin
+      allow delete: if false; // Permanent deletion strictly prohibited for financial audit compliance
+    }
+
+    // Payment Requests (Customer portal slips)
+    match /paymentRequests/{requestId} {
+      allow read: if isEmployee() || (isSignedIn() && resource.data.customerId != null && isCustomerOwner(resource.data.customerId));
+      allow create: if isSignedIn() && request.resource.data.customerId != null && isCustomerOwner(request.resource.data.customerId);
+      allow update: if isEmployee();
+      allow delete: if isAdmin();
+    }
+
+    // Employees collection
+    match /employees/{employeeId} {
+      allow read: if isEmployee();
+      allow write: if isAdmin();
+    }
+
+    // Expenses collection
+    match /expenses/{expenseId} {
+      allow read, write: if isAdmin();
+    }
+
+    // Income collection
+    match /income/{incomeId} {
+      allow read, write: if isEmployee();
+    }
+
+    // Complaints / Support Tickets
+    match /complaints/{complaintId} {
+      allow read: if isEmployee() || (isSignedIn() && resource.data.customerId != null && isCustomerOwner(resource.data.customerId));
+      allow create: if isSignedIn();
+      allow update: if isEmployee() || (isSignedIn() && resource.data.customerId != null && isCustomerOwner(resource.data.customerId));
+      allow delete: if isAdmin();
+    }
+
+    // Notifications
+    match /notifications/{notificationId} {
+      allow read: if isSignedIn();
+      allow write: if isEmployee();
+    }
+
+    // Company Settings
+    match /settings/{settingId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Audit Logs (Append-only)
+    match /auditLogs/{logId} {
+      allow read: if isAdmin();
+      allow create: if isSignedIn();
+      allow update, delete: if false; // Immutable audit log
+    }
+  }
+}

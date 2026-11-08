@@ -1,0 +1,304 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User account authentication and profile mapping",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "username": { "type": "string" },
+        "email": { "type": "string" },
+        "mobile": { "type": "string" },
+        "role": { "type": "string", "enum": ["admin", "employee", "customer"] },
+        "name": { "type": "string" },
+        "customerId": { "type": "string" },
+        "employeeId": { "type": "string" },
+        "active": { "type": "boolean" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "role", "name", "active"]
+    },
+    "Customer": {
+      "title": "Customer",
+      "description": "ISP broadband customer record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "mobile": { "type": "string" },
+        "altMobile": { "type": "string" },
+        "address": { "type": "string" },
+        "connectionDate": { "type": "string" },
+        "packageId": { "type": "string" },
+        "packageName": { "type": "string" },
+        "monthlyBill": { "type": "number" },
+        "status": { "type": "string", "enum": ["active", "inactive", "suspended"] },
+        "username": { "type": "string" },
+        "email": { "type": "string" },
+        "notes": { "type": "string" },
+        "balance": { "type": "number" },
+        "portalEnabled": { "type": "boolean" },
+        "zone": { "type": "string" }
+      },
+      "required": ["id", "name", "mobile", "address", "packageId", "monthlyBill", "status"]
+    },
+    "Package": {
+      "title": "Package",
+      "description": "ISP internet package speed and pricing tier",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "speed": { "type": "string" },
+        "price": { "type": "number" },
+        "description": { "type": "string" },
+        "active": { "type": "boolean" }
+      },
+      "required": ["id", "name", "speed", "price", "active"]
+    },
+    "Invoice": {
+      "title": "Invoice",
+      "description": "Monthly internet bill invoice",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "customerId": { "type": "string" },
+        "customerName": { "type": "string" },
+        "customerMobile": { "type": "string" },
+        "billingMonth": { "type": "string" },
+        "billingMonthKey": { "type": "string" },
+        "packageId": { "type": "string" },
+        "packageName": { "type": "string" },
+        "previousDue": { "type": "number" },
+        "currentBill": { "type": "number" },
+        "discount": { "type": "number" },
+        "additionalCharges": { "type": "number" },
+        "totalPayable": { "type": "number" },
+        "amountPaid": { "type": "number" },
+        "remainingBalance": { "type": "number" },
+        "status": { "type": "string", "enum": ["paid", "unpaid", "partially_paid", "overdue", "cancelled"] },
+        "billingDate": { "type": "string" },
+        "dueDate": { "type": "string" },
+        "createdAt": { "type": "string" }
+      },
+      "required": ["id", "customerId", "billingMonthKey", "totalPayable", "status"]
+    },
+    "Payment": {
+      "title": "Payment",
+      "description": "Confirmed and verified financial payment record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "customerId": { "type": "string" },
+        "customerName": { "type": "string" },
+        "invoiceId": { "type": "string" },
+        "amount": { "type": "number" },
+        "method": { "type": "string" },
+        "transactionId": { "type": "string" },
+        "paymentDate": { "type": "string" },
+        "collectedBy": { "type": "string" },
+        "collectedByRole": { "type": "string" },
+        "receiptNumber": { "type": "string" },
+        "notes": { "type": "string" },
+        "isReversed": { "type": "boolean" },
+        "reversedAt": { "type": "string" },
+        "reversedReason": { "type": "string" }
+      },
+      "required": ["id", "customerId", "amount", "method", "receiptNumber"]
+    },
+    "PaymentRequest": {
+      "title": "PaymentRequest",
+      "description": "Customer submitted online payment verification request",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "customerId": { "type": "string" },
+        "customerName": { "type": "string" },
+        "customerMobile": { "type": "string" },
+        "invoiceId": { "type": "string" },
+        "amount": { "type": "number" },
+        "method": { "type": "string" },
+        "transactionId": { "type": "string" },
+        "paymentDate": { "type": "string" },
+        "screenshotUrl": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "approved", "rejected"] },
+        "submittedAt": { "type": "string" },
+        "reviewedBy": { "type": "string" },
+        "reviewedAt": { "type": "string" },
+        "adminNote": { "type": "string" }
+      },
+      "required": ["id", "customerId", "amount", "method", "transactionId", "status"]
+    },
+    "Employee": {
+      "title": "Employee",
+      "description": "ISP billing and technical staff record",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "mobile": { "type": "string" },
+        "email": { "type": "string" },
+        "designation": { "type": "string" },
+        "joinedDate": { "type": "string" },
+        "status": { "type": "string", "enum": ["active", "inactive"] },
+        "totalCollected": { "type": "number" }
+      },
+      "required": ["id", "name", "mobile", "email", "designation", "status"]
+    },
+    "Expense": {
+      "title": "Expense",
+      "description": "Operating expense voucher",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "category": { "type": "string" },
+        "amount": { "type": "number" },
+        "date": { "type": "string" },
+        "description": { "type": "string" },
+        "recordedBy": { "type": "string" }
+      },
+      "required": ["id", "category", "amount", "date"]
+    },
+    "Income": {
+      "title": "Income",
+      "description": "Other income entry",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "category": { "type": "string" },
+        "amount": { "type": "number" },
+        "date": { "type": "string" },
+        "description": { "type": "string" },
+        "recordedBy": { "type": "string" }
+      },
+      "required": ["id", "category", "amount", "date"]
+    },
+    "Complaint": {
+      "title": "Complaint",
+      "description": "Customer technical support ticket",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "customerId": { "type": "string" },
+        "customerName": { "type": "string" },
+        "customerMobile": { "type": "string" },
+        "subject": { "type": "string" },
+        "category": { "type": "string" },
+        "description": { "type": "string" },
+        "priority": { "type": "string", "enum": ["low", "medium", "high"] },
+        "status": { "type": "string", "enum": ["pending", "in_progress", "resolved", "closed"] },
+        "createdAt": { "type": "string" },
+        "adminReply": { "type": "string" },
+        "assignedTo": { "type": "string" }
+      },
+      "required": ["id", "customerId", "subject", "status", "createdAt"]
+    },
+    "Notification": {
+      "title": "Notification",
+      "description": "System or user notifications",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "recipientRole": { "type": "string" },
+        "recipientCustomerId": { "type": "string" },
+        "title": { "type": "string" },
+        "message": { "type": "string" },
+        "type": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "read": { "type": "boolean" }
+      },
+      "required": ["id", "title", "message", "read"]
+    },
+    "CompanySettings": {
+      "title": "CompanySettings",
+      "description": "Company profile and billing configuration document",
+      "type": "object",
+      "properties": {
+        "companyName": { "type": "string" },
+        "tagline": { "type": "string" },
+        "address": { "type": "string" },
+        "contactNumber": { "type": "string" },
+        "supportNumber": { "type": "string" },
+        "whatsappNumber": { "type": "string" },
+        "email": { "type": "string" },
+        "invoicePrefix": { "type": "string" },
+        "billingCycleDay": { "type": "number" },
+        "dueDays": { "type": "number" },
+        "currency": { "type": "string" },
+        "bkashMerchant": { "type": "string" },
+        "nagadMerchant": { "type": "string" },
+        "rocketMerchant": { "type": "string" },
+        "bankDetails": { "type": "string" }
+      },
+      "required": ["companyName", "contactNumber", "currency"]
+    },
+    "AuditLog": {
+      "title": "AuditLog",
+      "description": "System and financial audit log trail",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "userId": { "type": "string" },
+        "userName": { "type": "string" },
+        "action": { "type": "string" },
+        "details": { "type": "string" },
+        "timestamp": { "type": "string" }
+      },
+      "required": ["id", "action", "timestamp"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profiles with role assignment"
+    },
+    "/customers/{customerId}": {
+      "schema": "Customer",
+      "description": "All ISP broadband customers"
+    },
+    "/packages/{packageId}": {
+      "schema": "Package",
+      "description": "Broadband speed packages"
+    },
+    "/invoices/{invoiceId}": {
+      "schema": "Invoice",
+      "description": "Customer invoices and billing statements"
+    },
+    "/payments/{paymentId}": {
+      "schema": "Payment",
+      "description": "Confirmed payments and receipts"
+    },
+    "/paymentRequests/{requestId}": {
+      "schema": "PaymentRequest",
+      "description": "Customer submitted payment verification requests"
+    },
+    "/employees/{employeeId}": {
+      "schema": "Employee",
+      "description": "Employee profiles and authorizations"
+    },
+    "/expenses/{expenseId}": {
+      "schema": "Expense",
+      "description": "ISP operational expense ledgers"
+    },
+    "/income/{incomeId}": {
+      "schema": "Income",
+      "description": "Non-subscription income records"
+    },
+    "/complaints/{complaintId}": {
+      "schema": "Complaint",
+      "description": "Customer complaints and support tickets"
+    },
+    "/notifications/{notificationId}": {
+      "schema": "Notification",
+      "description": "In-app notifications"
+    },
+    "/settings/{settingId}": {
+      "schema": "CompanySettings",
+      "description": "ISP settings and payment gateway merchants"
+    },
+    "/auditLogs/{logId}": {
+      "schema": "AuditLog",
+      "description": "Append-only system audit log"
+    }
+  }
+}
