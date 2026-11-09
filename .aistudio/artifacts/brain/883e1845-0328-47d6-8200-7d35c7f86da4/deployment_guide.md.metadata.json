@@ -1,0 +1,5 @@
+{
+  "summary":  "Production deployment guide and verification package for WINK NETWORK ISP on AmarHoster Webuzo shared hosting. Explains how to extract wink-isp-deployment.zip into public_html, Apache .htaccess rules, and Firebase domain authorization.",
+  "updatedAt":  "2026-11-09T19:41:11.827250905Z",
+  "userFacing":  true
+}

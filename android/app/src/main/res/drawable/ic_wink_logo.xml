@@ -1,0 +1,39 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="96dp"
+    android:height="96dp"
+    android:viewportWidth="96"
+    android:viewportHeight="96">
+    <!-- Rounded Background Squircle -->
+    <path
+        android:fillColor="#0B4FD8"
+        android:pathData="M24,4h48c11.05,0 20,8.95 20,20v48c0,11.05 -8.95,20 -20,20H24c-11.05,0 -20,-8.95 -20,-20V24c0,-11.05 8.95,-20 20,-20z" />
+    
+    <!-- Outer Wifi Wave (Orange) -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FF6E14"
+        android:strokeWidth="5"
+        android:strokeLineCap="round"
+        android:pathData="M26,38 C39.5,24.5 56.5,24.5 70,38" />
+    
+    <!-- Middle Wifi Wave (White) -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FFFFFF"
+        android:strokeWidth="5"
+        android:strokeLineCap="round"
+        android:pathData="M34,48 C42,40 54,40 62,48" />
+    
+    <!-- Inner Wifi Wave (Orange) -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FF6E14"
+        android:strokeWidth="5"
+        android:strokeLineCap="round"
+        android:pathData="M41,58 C45,54 51,54 55,58" />
+    
+    <!-- Central Wifi Dot (White) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M48,68 A4,4 0 1,1 48,67.99 Z" />
+</vector>

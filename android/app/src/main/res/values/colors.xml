@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Brand Palette -->
+    <color name="wink_blue">#0B4FD8</color>
+    <color name="wink_blue_dark">#002D80</color>
+    <color name="wink_blue_light">#EBF3FF</color>
+    <color name="wink_orange">#FF6E14</color>
+    <color name="wink_orange_dark">#D95600</color>
+    <color name="wink_orange_light">#FFF4ED</color>
+    
+    <!-- Neutrals -->
+    <color name="white">#FFFFFFFF</color>
+    <color name="black">#FF000000</color>
+    <color name="slate_900">#0F172A</color>
+    <color name="slate_800">#1E293B</color>
+    <color name="slate_600">#475569</color>
+    <color name="slate_400">#94A3B8</color>
+    <color name="slate_100">#F1F5F9</color>
+    <color name="slate_50">#F8FAFC</color>
+    
+    <!-- Semantic -->
+    <color name="status_green">#10B981</color>
+    <color name="status_red">#EF4444</color>
+</resources>

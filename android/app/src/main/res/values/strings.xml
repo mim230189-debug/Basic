@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">WINK NETWORK ISP</string>
+    <string name="app_tagline">প্রোডাকশন আইএসপি বিলিং ও ম্যানেজমেন্ট সিস্টেম</string>
+    
+    <!-- Offline & Error Strings -->
+    <string name="offline_title">ইন্টারনেট সংযোগ বিচ্ছিন্ন রয়েছে</string>
+    <string name="offline_subtitle">আপনার ডিভাইসের ওয়াইফাই বা মোবাইল ডাটা সংযোগ চালু আছে কিনা পরীক্ষা করুন।</string>
+    <string name="btn_retry">পুনরায় চেষ্টা করুন</string>
+    <string name="btn_call_hotline">কাস্টমার কেয়ার কল করুন (%s)</string>
+    <string name="hotline_number">+8809600998877</string>
+    <string name="hotline_display">+880 9600-998877</string>
+    
+    <!-- Download Strings -->
+    <string name="download_started">ইনভয়েস ডাউনলোড শুরু হয়েছে…</string>
+    <string name="download_failed">ডাউনলোড সম্পন্ন করা সম্ভব হয়নি</string>
+    
+    <!-- Exit Confirmation -->
+    <string name="exit_prompt">অ্যাপ বন্ধ করতে আবার ব্যাক চাপুন</string>
+</resources>

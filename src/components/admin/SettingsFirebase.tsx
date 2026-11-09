@@ -15,6 +15,9 @@ import {
   Copy,
   ExternalLink,
   Code2,
+  Download,
+  FileArchive,
+  Server,
 } from 'lucide-react';
 
 import firebaseAppletConfig from '../../../firebase-applet-config.json';
@@ -422,6 +425,46 @@ export const SettingsFirebase: React.FC = () => {
             <pre className="p-3 bg-slate-950 text-slate-200 text-[10px] font-mono rounded-2xl overflow-x-auto max-h-40 border border-slate-800">
               {FIRESTORE_RULES_CONTENT}
             </pre>
+          </div>
+        </div>
+
+        {/* AmarHoster Webuzo Shared Hosting Deployment Card */}
+        <div className="bg-white dark:bg-slate-900 p-5 rounded-3xl border border-slate-200 dark:border-slate-800 space-y-4 shadow-sm">
+          <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+            <div className="flex items-center gap-2">
+              <Server className="w-4 h-4 text-blue-600" />
+              <h3 className="font-bold text-sm text-slate-900 dark:text-white">
+                শেয়ার্ড হোস্টিং ডিপ্লয়মেন্ট (AmarHoster Webuzo / cPanel)
+              </h3>
+            </div>
+            <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300 border border-blue-300">
+              Apache Ready (.htaccess included)
+            </span>
+          </div>
+
+          <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
+            আপনার ওয়েবসাইটের সম্পূর্ণ প্রোডাকশন বিল্ড ফাইল (index.html, .htaccess, এবং সকল CSS/JS অ্যাসেট) একটি একক ZIP ফাইলে প্যাকেজ করা হয়েছে। এটি সরাসরি ডাউনলোড করে Webuzo-এর <strong className="text-slate-900 dark:text-slate-100 font-mono">public_html</strong> ফোল্ডারে এক্সট্রাক্ট করুন।
+          </p>
+
+          <div className="p-4 bg-slate-50 dark:bg-slate-950/60 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-900/40 text-blue-600 flex items-center justify-center shrink-0">
+                <FileArchive className="w-5 h-5" />
+              </div>
+              <div>
+                <h4 className="text-xs font-bold text-slate-900 dark:text-white font-mono">wink-isp-deployment.zip</h4>
+                <p className="text-[11px] text-slate-500">প্রোডাকশন ডিস্ট্রিবিউশন প্যাকেজ (সাইজ: ~604 KB)</p>
+              </div>
+            </div>
+
+            <a
+              href="/wink-isp-deployment.zip"
+              download="wink-isp-deployment.zip"
+              className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-bold text-xs shadow-sm transition-all active:scale-95 shrink-0"
+            >
+              <Download className="w-4 h-4" />
+              <span>ডিপ্লয়মেন্ট জিপ ডাউনলোড করুন (Download ZIP)</span>
+            </a>
           </div>
         </div>
 

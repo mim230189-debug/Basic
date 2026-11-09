@@ -1,0 +1,5 @@
+{
+  "summary": "Ready-to-upload production ZIP archive for AmarHoster Webuzo shared hosting. Contains index.html, .htaccess (with Apache SPA routing and HTTPS redirect), and all production asset bundles.",
+  "updatedAt": "2026-11-09T19:43:16.000000000Z",
+  "userFacing": true
+}

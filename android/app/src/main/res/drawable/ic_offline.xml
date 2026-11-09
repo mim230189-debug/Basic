@@ -1,0 +1,14 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="72dp"
+    android:height="72dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <!-- Offline Cloud with Slash -->
+    <path
+        android:fillColor="#00000000"
+        android:strokeColor="#FF6E14"
+        android:strokeWidth="1.8"
+        android:strokeLineCap="round"
+        android:strokeLineJoin="round"
+        android:pathData="M3,3 L21,21 M9.9,4.24 C10.58,4.08 11.28,4 12,4 C15.93,4 19.16,6.97 19.47,10.79 C20.93,11.23 22,12.59 22,14.2 C22,15.15 21.61,16.01 20.99,16.63 M15.65,15.65 C14.65,16.48 13.39,17 12,17 C9.24,17 7,14.76 7,12 C7,11.55 7.06,11.12 7.18,10.71 M4.16,7.8 C2.89,8.71 2,10.25 2,12 C2,14.76 4.24,17 7,17 L7.5,17" />
+</vector>
